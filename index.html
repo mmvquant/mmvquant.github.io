@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahesh Vardhan Madduri — Data Scientist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#1e1e1e',
+                        surface: '#252525',
+                        surfaceLight: '#2d2d2d',
+                        border: '#333333',
+                        textPrimary: '#e6e6e6',
+                        textSecondary: '#888888',
+                        neonGreen: '#00FF00',
+                        neonBlue: '#00D7FF',
+                        neonGreenDim: 'rgba(0,255,0,0.15)',
+                        neonBlueDim: 'rgba(0,215,255,0.15)',
+                        pureBlack: '#000000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #1e1e1e; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00FF00; }
+
+        ::selection { background: rgba(0,255,0,0.25); color: #00FF00; }
+
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        @keyframes scanline { 0%{top:-100%} 100%{top:100%} }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes typeIn { from{width:0} to{width:100%} }
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes glowPulse { 0%,100%{box-shadow:0 0 5px rgba(0,255,0,0.3)} 50%{box-shadow:0 0 20px rgba(0,255,0,0.6)} }
+        @keyframes matrixRain { 0%{transform:translateY(-100%);opacity:1} 100%{transform:translateY(100vh);opacity:0} }
+        @keyframes slideIn { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
+
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
+        .animate-glow { animation: glowPulse 3s ease-in-out infinite; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        .stagger-1 { animation-delay: 0.1s; opacity: 0; }
+        .stagger-2 { animation-delay: 0.2s; opacity: 0; }
+        .stagger-3 { animation-delay: 0.3s; opacity: 0; }
+        .stagger-4 { animation-delay: 0.4s; opacity: 0; }
+        .stagger-5 { animation-delay: 0.5s; opacity: 0; }
+
+        .code-window::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,255,0,0.015) 2px,
+                rgba(0,255,0,0.015) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .tag-active {
+            background: rgba(0,255,0,0.15) !important;
+            color: #00FF00 !important;
+            border-color: rgba(0,255,0,0.4) !important;
+        }
+
+        .article-card {
+            transition: all 0.3s ease;
+        }
+        .article-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0,255,0,0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,255,0,0.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #00FF00;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .skill-bar {
+            background: linear-gradient(90deg, #00FF00, #00D7FF);
+            transition: width 1.5s ease-out;
+        }
+
+        .github-card:hover .github-card-icon {
+            transform: scale(1.1);
+            color: #00FF00;
+        }
+
+        .section-visible .animate-on-scroll {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0.03;
+        }
+
+        .toast {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+
+        .avatar-ring {
+            background: linear-gradient(135deg, #00FF00 0%, #00D7FF 50%, #00FF00 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="bg-bg text-textPrimary font-sans antialiased">
+
+    <!-- Matrix Rain Background -->
+    <div class="matrix-bg" id="matrixBg"></div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-24 right-6 z-[100] flex flex-col gap-3"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-xl border-b border-border">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg bg-neonGreenDim border border-neonGreen/30 flex items-center justify-center group-hover:border-neonGreen/60 transition-colors">
+                    <span class="font-mono text-neonGreen text-sm font-bold">MV</span>
+                </div>
+                <span class="font-mono text-sm text-textSecondary group-hover:text-neonGreen transition-colors hidden sm:inline">
+                    mahesh<span class="text-neonGreen">@</span>blog
+                </span>
+            </a>
+            <div class="flex items-center gap-1 sm:gap-6">
+                <a href="#articles" class="nav-link text-xs sm:text-sm text-textSecondary hover:text-textPrimary transition-colors font-medium tracking-wide">Articles</a>
+                <a href="#projects" class="nav-link text-xs sm:text-sm text-textSecondary hover:text-textPrimary transition-colors font-medium tracking-wide">Projects</a>
+                <a href="#about" class="nav-link text-xs sm:text-sm text-textSecondary hover:text-textPrimary transition-colors font-medium tracking-wide">About</a>
+                <a href="https://linkedin.com/in/mmvcodes" target="_blank" class="ml-2 w-9 h-9 rounded-lg bg-surface border border-border flex items-center justify-center hover:border-neonGreen/40 hover:bg-neonGreenDim transition-all">
+                    <iconify-icon icon="mdi:linkedin" class="text-textSecondary hover:text-neonGreen text-lg"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <!-- Grid Background -->
+        <div class="absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(#00FF00 1px, transparent 1px), linear-gradient(90deg, #00FF00 1px, transparent 1px); background-size: 60px 60px;"></div>
+        <!-- Radial Glow -->
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-neonGreen/[0.03] blur-[120px]"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-neonBlue/[0.02] blur-[100px]"></div>
+
+        <div class="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+            <!-- Left: Info -->
+            <div class="space-y-8">
+                <div class="animate-fadeInUp stagger-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neonGreen/20 bg-neonGreenDim mb-6">
+                        <span class="w-1.5 h-1.5 rounded-full bg-neonGreen animate-glow"></span>
+                        <span class="font-mono text-[11px] text-neonGreen tracking-wider uppercase">Open to Opportunities</span>
+                    </div>
+                </div>
+
+                <h1 class="animate-fadeInUp stagger-2">
+                    <span class="block text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1]">
+                        Mahesh Vardhan<br>
+                        <span class="text-neonGreen">Madduri</span>
+                    </span>
+                    <span class="block text-lg sm:text-xl text-textSecondary font-light mt-4 tracking-tight">Data Scientist</span>
+                </h1>
+
+                <p class="animate-fadeInUp stagger-3 text-textSecondary text-base leading-relaxed max-w-md font-light">
+                    5 years of experience designing and deploying production-grade machine learning systems. Specializing in deep learning, NLP, and scalable data pipelines delivering measurable business impact.
+                </p>
+
+                <!-- Terminal-style stats -->
+                <div class="animate-fadeInUp stagger-4 bg-surface border border-border rounded-xl p-4 code-window relative overflow-hidden">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-3 h-3 rounded-full bg-[#ff5f57]"></span>
+                        <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+                        <span class="w-3 h-3 rounded-full bg-[#28c840]"></span>
+                        <span class="font-mono text-[10px] text-textSecondary ml-2">profile.sh</span>
+                    </div>
+                    <div class="font-mono text-xs space-y-1.5 relative z-10">
+                        <div><span class="text-neonGreen">$</span> <span class="text-textSecondary">experience</span> <span class="text-neonBlue">--years</span> <span class="text-neonGreen">5</span></div>
+                        <div><span class="text-neonGreen">$</span> <span class="text-textSecondary">models_deployed</span> <span class="text-neonBlue">--count</span> <span class="text-neonGreen">47+</span></div>
+                        <div><span class="text-neonGreen">$</span> <span class="text-textSecondary">datasets_processed</span> <span class="text-neonBlue">--size</span> <span class="text-neonGreen">50TB+</span></div>
+                        <div><span class="text-neonGreen">$</span> <span class="text-textSecondary">papers_published</span> <span class="text-neonBlue">--count</span> <span class="text-neonGreen">8</span></div>
+                        <div class="flex items-center"><span class="text-neonGreen">$</span> <span class="text-textSecondary mr-2">echo</span> <span class="text-textPrimary">"Let's connect and build"</span><span class="cursor-blink text-neonGreen ml-0.5">▊</span></div>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="animate-fadeInUp stagger-5 flex items-center gap-3">
+                    <a href="https://linkedin.com/in/mmvcodes" target="_blank" class="group w-11 h-11 rounded-xl bg-surface border border-border flex items-center justify-center hover:border-neonBlue/40 hover:bg-neonBlueDim transition-all">
+                        <iconify-icon icon="mdi:linkedin" class="text-textSecondary group-hover:text-neonBlue text-xl transition-colors"></iconify-icon>
+                    </a>
+                    <a href="#" class="group w-11 h-11 rounded-xl bg-surface border border-border flex items-center justify-center hover:border-neonGreen/40 hover:bg-neonGreenDim transition-all">
+                        <iconify-icon icon="mdi:github" class="text-textSecondary group-hover:text-neonGreen text-xl transition-colors"></iconify-icon>
+                    </a>
+                    <a href="#" class="group w-11 h-11 rounded-xl bg-surface border border-border flex items-center justify-center hover:border-neonGreen/40 hover:bg-neonGreenDim transition-all">
+                        <iconify-icon icon="mdi:twitter" class="text-textSecondary group-hover:text-neonGreen text-xl transition-colors"></iconify-icon>
+                    </a>
+                                   </div>
+            </div>
+
+            <!-- Right: Code Editor Visual -->
+            <div class="animate-fadeInUp stagger-3 animate-float hidden lg:block">
+                <div class="bg-surface border border-border rounded-2xl overflow-hidden shadow-2xl shadow-black/50 code-window relative">
+                    <div class="flex items-center justify-between px-4 py-3 border-b border-border">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-[#ff5f57]"></span>
+                            <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+                            <span class="w-3 h-3 rounded-full bg-[#28c840]"></span>
+                        </div>
+                        <span class="font-mono text-[11px] text-textSecondary">model_pipeline.py</span>
+                        <div class="flex items-center gap-1">
+                            <span class="font-mono text-[10px] text-textSecondary px-2 py-0.5 rounded bg-surfaceLight">Python</span>
+                        </div>
+                    </div>
+                    <div class="p-5 font-mono text-[13px] leading-7 relative z-10 overflow-x-auto">
+                        <div><span class="text-[#c678dd]">import</span> <span class="text-textPrimary">pandas <span class="text-[#c678dd]">as</span> pd</span></div>
+                        <div><span class="text-[#c678dd]">import</span> <span class="text-textPrimary">numpy <span class="text-[#c678dd]">as</span> np</span></div>
+                        <div><span class="text-[#c678dd]">from</span> <span class="text-textPrimary">sklearn.ensemble <span class="text-[#c678dd]">import</span> RandomForest</span></div>
+                        <div><span class="text-[#c678dd]">from</span> <span class="text-textPrimary">transformers <span class="text-[#c678dd]">import</span> AutoModel</span></div>
+                        <div class="text-textSecondary/40">&nbsp;</div>
+                        <div><span class="text-[#c678dd]">class</span> <span class="text-[#e5c07b]">MLPipeline</span><span class="text-textPrimary">:</span></div>
+                        <div><span class="text-textSecondary">    </span><span class="text-[#c678dd]">def</span> <span class="text-[#61afef]">__init__</span><span class="text-textPrimary">(self, config):</span></div>
+                        <div><span class="text-textSecondary">        </span><span class="text-textPrimary">self.config = config</span></div>
+                        <div><span class="text-textSecondary">        </span><span class="text-textPrimary">self.model = <span class="text-[#c678dd]">None</span></span></div>
+                        <div><span class="text-textSecondary">        </span><span class="text-textPrimary">self.metrics = {}</span></div>
+                        <div class="text-textSecondary/40">&nbsp;</div>
+                        <div><span class="text-textSecondary">    </span><span class="text-[#c678dd]">def</span> <span class="text-[#61afef]">train</span><span class="text-textPrimary">(self, X, y):</span></div>
+                        <div><span class="text-textSecondary">        </span><span class="text-textPrimary">self.model = RandomForest(</span></div>
+                        <div><span class="text-textSecondary">            </span><span class="text-textPrimary">n_estimators=<span class="text-[#d19a66]">500</span>,</span></div>
+                        <div><span class="text-textSecondary">            </span><span class="text-textPrimary">max_depth=<span class="text-[#d19a66]">15</span>,</span></div>
+                        <div><span class="text-textSecondary">            </span><span class="text-textPrimary">n_jobs=<span class="text-[#d19a66]">-1</span></span></div>
+                        <div><span class="text-textSecondary">        </span><span class="text-textPrimary">)</span></div>
+                        <div><span class="text-textSecondary">        </span><span class="text-textPrimary">self.model.fit(X, y)</span></div>
+                        <div><span class="text-textSecondary">        </span><span class="text-[#c678dd]">return</span> <span class="text-textPrimary">self</span></div>
+                    </div>
+                    <div class="px-5 py-3 border-t border-border flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono text-[10px] text-textSecondary">Ln 15, Col 24</span>
+                            <span class="font-mono text-[10px] text-neonGreen">UTF-8</span>
+                        </div>
+                        <span class="font-mono text-[10px] text-textSecondary">Python 3.11</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="font-mono text-[10px] text-textSecondary tracking-widest uppercase">Scroll</span>
+            <iconify-icon icon="mdi:chevron-down" class="text-neonGreen text-xl"></iconify-icon>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section id="articles" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="font-mono text-neonGreen text-sm">#</span>
+                        <span class="font-mono text-[11px] text-textSecondary tracking-widest uppercase">Blog Posts</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight">Recent Articles</h2>
+                </div>
+                <!-- Tag Filters -->
+                <div class="flex items-center gap-2 flex-wrap" id="tagFilters">
+                    <button onclick="filterArticles('all')" class="tag-btn tag-active font-mono text-[11px] px-3 py-1.5 rounded-lg border border-border bg-surface text-textSecondary hover:text-textPrimary transition-all tracking-wide" data-tag="all">All Posts</button>
+                    <button onclick="filterArticles('ml')" class="tag-btn font-mono text-[11px] px-3 py-1.5 rounded-lg border border-border bg-surface text-textSecondary hover:text-textPrimary transition-all tracking-wide" data-tag="ml">ML / AI</button>
+                    <button onclick="filterArticles('dataeng')" class="tag-btn font-mono text-[11px] px-3 py-1.5 rounded-lg border border-border bg-surface text-textSecondary hover:text-textPrimary transition-all tracking-wide" data-tag="dataeng">Data Engineering</button>
+                    <button onclick="filterArticles('tools')" class="tag-btn font-mono text-[11px] px-3 py-1.5 rounded-lg border border-border bg-surface text-textSecondary hover:text-textPrimary transition-all tracking-wide" data-tag="tools">Tools</button>
+                    <button onclick="filterArticles('career')" class="tag-btn font-mono text-[11px] px-3 py-1.5 rounded-lg border border-border bg-surface text-textSecondary hover:text-textPrimary transition-all tracking-wide" data-tag="career">Career</button>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5" id="articlesGrid">
+                <!-- Article 1 -->
+                <article class="article-card bg-surface border border-border rounded-xl overflow-hidden cursor-pointer group" data-tags="ml" onclick="openArticle(this)">
+                    <div class="aspect-[16/9] relative overflow-hidden bg-pureBlack">
+                        <img src="https://picsum.photos/seed/neural-network-viz/600/340.jpg" class="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" alt="">
+                        <div class="absolute top-3 left-3 flex gap-2">
+                            <span class="font-mono text-[10px] px-2 py-1 rounded-md bg-neonGreen/20 text-neonGreen border border-neonGreen/30 backdrop-blur-sm">ML / AI</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 font-mono text-[10px] text-textSecondary bg-black/60 backdrop-blur-sm px-2 py-1 rounded-md">12 min read</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-semibold mb-2 group-hover:text-neonGreen transition-colors leading-snug">Building Production RAG Systems: Lessons from Deploying LLMs at Scale</h3>
+                        <p class="text-textSecondary text-sm font-light leading-relaxed line-clamp-2 mb-4">A deep dive into retrieval-augmented generation architectures, vector database selection, and the gotchas of moving from prototype to production.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-[11px] text-textSecondary">Dec 15, 2025</span>
+                            <span class="font-mono text-[11px] text-neonGreen opacity-0 group-hover:opacity-100 transition-opacity">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card bg-surface border border-border rounded-xl overflow-hidden cursor-pointer group" data-tags="dataeng" onclick="openArticle(this)">
+                    <div class="aspect-[16/9] relative overflow-hidden bg-pureBlack">
+                        <img src="https://picsum.photos/seed/data-pipeline-flow/600/340.jpg" class="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" alt="">
+                        <div class="absolute top-3 left-3 flex gap-2">
+                            <span class="font-mono text-[10px] px-2 py-1 rounded-md bg-neonBlue/20 text-neonBlue border border-neonBlue/30 backdrop-blur-sm">Data Eng</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 font-mono text-[10px] text-textSecondary bg-black/60 backdrop-blur-sm px-2 py-1 rounded-md">8 min read</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-semibold mb-2 group-hover:text-neonBlue transition-colors leading-snug">Real-Time Feature Stores with Kafka and Redis: Architecture Guide</h3>
+                        <p class="text-textSecondary text-sm font-light leading-relaxed line-clamp-2 mb-4">How we built a low-latency feature serving system handling 100K+ QPS for our ML models in production.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-[11px] text-textSecondary">Nov 28, 2025</span>
+                            <span class="font-mono text-[11px] text-neonBlue opacity-0 group-hover:opacity-100 transition-opacity">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card bg-surface border border-border rounded-xl overflow-hidden cursor-pointer group" data-tags="tools" onclick="openArticle(this)">
+                    <div class="aspect-[16/9] relative overflow-hidden bg-pureBlack">
+                        <img src="https://picsum.photos/seed/python-tools-dark/600/340.jpg" class="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" alt="">
+                        <div class="absolute top-3 left-3 flex gap-2">
+                            <span class="font-mono text-[10px] px-2 py-1 rounded-md bg-[#ffbd2e]/20 text-[#ffbd2e] border border-[#ffbd2e]/30 backdrop-blur-sm">Tools</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 font-mono text-[10px] text-textSecondary bg-black/60 backdrop-blur-sm px-2 py-1 rounded-md">6 min read</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-semibold mb-2 group-hover:text-[#ffbd2e] transition-colors leading-snug">My VS Code Setup for Data Science in 2026</h3>
+                        <p class="text-textSecondary text-sm font-light leading-relaxed line-clamp-2 mb-4">Extensions, keybindings, and workflows that tripled my productivity. Includes Jupyter, DVC, and remote development tips.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-[11px] text-textSecondary">Nov 10, 2025</span>
+                            <span class="font-mono text-[11px] text-[#ffbd2e] opacity-0 group-hover:opacity-100 transition-opacity">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="article-card bg-surface border border-border rounded-xl overflow-hidden cursor-pointer group" data-tags="ml" onclick="openArticle(this)">
+                    <div class="aspect-[16/9] relative overflow-hidden bg-pureBlack">
+                        <img src="https://picsum.photos/seed/deep-learning-gpu/600/340.jpg" class="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" alt="">
+                        <div class="absolute top-3 left-3 flex gap-2">
+                            <span class="font-mono text-[10px] px-2 py-1 rounded-md bg-neonGreen/20 text-neonGreen border border-neonGreen/30 backdrop-blur-sm">ML / AI</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 font-mono text-[10px] text-textSecondary bg-black/60 backdrop-blur-sm px-2 py-1 rounded-md">15 min read</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-semibold mb-2 group-hover:text-neonGreen transition-colors leading-snug">Fine-Tuning LLaMA 3 on Custom Data: A Practical Walkthrough</h3>
+                        <p class="text-textSecondary text-sm font-light leading-relaxed line-clamp-2 mb-4">Step-by-step guide to fine-tuning large language models using QLoRA, covering data prep, training loops, and evaluation.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-[11px] text-textSecondary">Oct 22, 2025</span>
+                            <span class="font-mono text-[11px] text-neonGreen opacity-0 group-hover:opacity-100 transition-opacity">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="article-card bg-surface border border-border rounded-xl overflow-hidden cursor-pointer group" data-tags="career" onclick="openArticle(this)">
+                    <div class="aspect-[16/9] relative overflow-hidden bg-pureBlack">
+                        <img src="https://picsum.photos/seed/career-growth-tech/600/340.jpg" class="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" alt="">
+                        <div class="absolute top-3 left-3 flex gap-2">
+                            <span class="font-mono text-[10px] px-2 py-1 rounded-md bg-[#c678dd]/20 text-[#c678dd] border border-[#c678dd]/30 backdrop-blur-sm">Career</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 font-mono text-[10px] text-textSecondary bg-black/60 backdrop-blur-sm px-2 py-1 rounded-md">10 min read</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-semibold mb-2 group-hover:text-[#c678dd] transition-colors leading-snug">From Junior to Senior Data Scientist: What Nobody Tells You</h3>
+                        <p class="text-textSecondary text-sm font-light leading-relaxed line-clamp-2 mb-4">Reflections on 5 years in the industry — the technical leaps, the soft skills gap, and the mindset shifts that matter most.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-[11px] text-textSecondary">Oct 05, 2025</span>
+                            <span class="font-mono text-[11px] text-[#c678dd] opacity-0 group-hover:opacity-100 transition-opacity">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="article-card bg-surface border border-border rounded-xl overflow-hidden cursor-pointer group" data-tags="dataeng" onclick="openArticle(this)">
+                    <div class="aspect-[16/9] relative overflow-hidden bg-pureBlack">
+                        <img src="https://picsum.photos/seed/dbt-transform/600/340.jpg" class="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" alt="">
+                        <div class="absolute top-3 left-3 flex gap-2">
+                            <span class="font-mono text-[10px] px-2 py-1 rounded-md bg-neonBlue/20 text-neonBlue border border-neonBlue/30 backdrop-blur-sm">Data Eng</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3 font-mono text-[10px] text-textSecondary bg-black/60 backdrop-blur-sm px-2 py-1 rounded-md">9 min read</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-semibold mb-2 group-hover:text-neonBlue transition-colors leading-snug">dbt + Spark: Building Maintainable ML Data Pipelines</h3>
+                        <p class="text-textSecondary text-sm font-light leading-relaxed line-clamp-2 mb-4">Why we moved from raw PySpark transforms to dbt models and how it improved our pipeline maintainability by 10x.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-[11px] text-textSecondary">Sep 18, 2025</span>
+                            <span class="font-mono text-[11px] text-neonBlue opacity-0 group-hover:opacity-100 transition-opacity">Read →</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Article Detail -->
+    <section id="articleDetail" class="py-24 relative hidden">
+        <div class="max-w-4xl mx-auto px-6">
+            <button onclick="closeArticle()" class="flex items-center gap-2 font-mono text-xs text-textSecondary hover:text-neonGreen transition-colors mb-10 group">
+                <iconify-icon icon="mdi:arrow-left" class="group-hover:-translate-x-1 transition-transform"></iconify-icon>
+                Back to Articles
+            </button>
+
+            <div class="mb-8">
+                <span class="font-mono text-[10px] px-2 py-1 rounded-md bg-neonGreen/20 text-neonGreen border border-neonGreen/30">ML / AI</span>
+                <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight mt-4 mb-4 leading-tight">Building Production RAG Systems: Lessons from Deploying LLMs at Scale</h1>
+                <div class="flex items-center gap-4 text-textSecondary font-mono text-xs">
+                    <span>Dec 15, 2025</span>
+                    <span class="w-1 h-1 rounded-full bg-border"></span>
+                    <span>12 min read</span>
+                    <span class="w-1 h-1 rounded-full bg-border"></span>
+                    <span>4,832 views</span>
+                </div>
+            </div>
+
+            <div class="rounded-2xl overflow-hidden mb-10 aspect-[21/9]">
+                <img src="https://picsum.photos/seed/rag-architecture-diagram/1200/520.jpg" class="w-full h-full object-cover opacity-80" alt="">
+            </div>
+
+            <!-- Markdown Content -->
+            <div class="prose-custom space-y-6 text-textPrimary/90 leading-relaxed">
+                <p class="text-lg font-light">Retrieval-Augmented Generation (RAG) has become the de facto pattern for building LLM applications that need to reference private or up-to-date knowledge. But moving from a notebook prototype to a production system is where most teams stumble.</p>
+
+                <h2 class="text-xl font-semibold !mt-10 !mb-4 flex items-center gap-2">
+                    <span class="text-neonGreen font-mono text-base">01.</span>
+                    The Architecture
+                </h2>
+                <p>In production RAG, the retrieval quality matters more than the model size. We found that a well-tuned retrieval pipeline with a smaller model consistently outperformed a larger model with naive retrieval.</p>
+
+                <!-- Code Block -->
+                <div class="bg-surface border border-border rounded-xl overflow-hidden code-window relative my-6">
+                    <div class="flex items-center justify-between px-4 py-3 border-b border-border">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-[#ff5f57]"></span>
+                            <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+                            <span class="w-3 h-3 rounded-full bg-[#28c840]"></span>
+                        </div>
+                        <span class="font-mono text-[11px] text-textSecondary">rag_pipeline.py</span>
+                        <button onclick="copyCode(this)" class="font-mono text-[10px] text-textSecondary hover:text-neonGreen transition-colors flex items-center gap-1">
+                            <iconify-icon icon="mdi:content-copy" class="text-sm"></iconify-icon>
+                            Copy
+                        </button>
+                    </div>
+                    <div class="p-5 font-mono text-[13px] leading-7 relative z-10 overflow-x-auto">
+<pre class="!bg-transparent !p-0 !m-0 !border-none"><span class="text-[#c678dd]">from</span> <span class="text-textPrimary">langchain.embeddings <span class="text-[#c678dd]">import</span> HuggingFaceEmbeddings</span>
+<span class="text-[#c678dd]">from</span> <span class="text-textPrimary">langchain.vectorstores <span class="text-[#c678dd]">import</span> Chroma</span>
+<span class="text-[#c678dd]">from</span> <span class="text-textPrimary">langchain.chains <span class="text-[#c678dd]">import</span> RetrievalQA</span>
+<span class="text-[#c678dd]">from</span> <span class="text-textPrimary">transformers <span class="text-[#c678dd]">import</span> AutoTokenizer, AutoModelForCausalLM</span>
+
+<span class="text-[#c678dd]">class</span> <span class="text-[#e5c07b]">ProductionRAG</span><span class="text-textPrimary">:</span>
+<span class="text-textPrimary">    </span><span class="text-[#c678dd]">def</span> <span class="text-[#61afef]">__init__</span><span class="text-textPrimary">(self, config: dict):</span>
+<span class="text-textPrimary">        self.embeddings = HuggingFaceEmbeddings(</span>
+<span class="text-textPrimary">            model_name=</span><span class="text-[#98c379]">"BAAI/bge-large-en-v1.5"</span><span class="text-textPrimary">,</span>
+<span class="text-textPrimary">            encode_kwargs={</span><span class="text-[#98c379]">"normalize_embeddings"</span><span class="text-textPrimary">: </span><span class="text-[#d19a66]">True</span><span class="text-textPrimary">}</span>
+<span class="text-textPrimary">        )</span>
+<span class="text-textPrimary">        self.vectorstore = Chroma(</span>
+<span class="text-textPrimary">            persist_directory=config[</span><span class="text-[#98c379]">"chroma_path"</span><span class="text-textPrimary">],</span>
+<span class="text-textPrimary">            embedding_function=self.embeddings</span>
+<span class="text-textPrimary">        )</span>
+
+<span class="text-textPrimary">    </span><span class="text-[#c678dd]">def</span> <span class="text-[#61afef]">query</span><span class="text-textPrimary">(self, question: str, k=</span><span class="text-[#d19a66]">5</span><span class="text-textPrimary">) -> str:</span>
+<span class="text-textPrimary">        retriever = self.vectorstore.as_retriever(</span>
+<span class="text-textPrimary">            search_type=</span><span class="text-[#98c379]">"mmr"</span><span class="text-textPrimary">,</span>
+<span class="text-textPrimary">            search_kwargs={</span><span class="text-[#98c379]">"k"</span><span class="text-textPrimary">: k, </span><span class="text-[#98c379]">"fetch_k"</span><span class="text-textPrimary">: </span><span class="text-[#d19a66]">20</span><span class="text-textPrimary">}</span>
+<span class="text-textPrimary">        )</span>
+<span class="text-textPrimary">        docs = retriever.invoke(question)</span>
+<span class="text-textPrimary">        </span><span class="text-[#c678dd]">return</span> <span class="text-textPrimary">self._generate(question, docs)</span></pre>
+                    </div>
+                </div>
+
+                <h2 class="text-xl font-semibold !mt-10 !mb-4 flex items-center gap-2">
+                    <span class="text-neonGreen font-mono text-base">02.</span>
+                    Vector Database Selection
+                </h2>
+                <p>We benchmarked four vector databases across three dimensions that matter in production: latency at scale, filtering capability, and operational complexity. Here are the results:</p>
+
+                <!-- Results Table -->
+                <div class="overflow-x-auto my-6">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-border">
+                                <th class="text-left font-mono text-[11px] text-textSecondary py-3 px-4 uppercase tracking-wider">Database</th>
+                                <th class="text-left font-mono text-[11px] text-textSecondary py-3 px-4 uppercase tracking-wider">P99 Latency</th>
+                                <th class="text-left font-mono text-[11px] text-textSecondary py-3 px-4 uppercase tracking-wider">Filtering</th>
+                                <th class="text-left font-mono text-[11px] text-textSecondary py-3 px-4 uppercase tracking-wider">Ops Score</th>
+                            </tr>
+                        </thead>
+                        <tbody class="font-mono text-[13px]">
+                            <tr class="border-b border-border/50 hover:bg-surface transition-colors">
+                                <td class="py-3 px-4 text-neonGreen">Qdrant</td>
+                                <td class="py-3 px-4">12ms</td>
+                                <td class="py-3 px-4"><span class="text-neonGreen">Excellent</span></td>
+                                <td class="py-3 px-4">9/10</td>
+                            </tr>
+                            <tr class="border-b border-border/50 hover:bg-surface transition-colors">
+                                <td class="py-3 px-4 text-neonBlue">Weaviate</td>
+                                <td class="py-3 px-4">18ms</td>
+                                <td class="py-3 px-4"><span class="text-neonGreen">Excellent</span></td>
+                                <td class="py-3 px-4">7/10</td>
+                            </tr>
+                            <tr class="border-b border-border/50 hover:bg-surface transition-colors">
+                                <td class="py-3 px-4 text-[#ffbd2e]">Pinecone</td>
+                                <td class="py-3 px-4">8ms</td>
+                                <td class="py-3 px-4"><span class="text-[#ffbd2e]">Good</span></td>
+                                <td class="py-3 px-4">8/10</td>
+                            </tr>
+                            <tr class="hover:bg-surface transition-colors">
+                                <td class="py-3 px-4 text-textSecondary">Chroma</td>
+                                <td class="py-3 px-4">25ms</td>
+                                <td class="py-3 px-4"><span class="text-[#ff5f57]">Basic</span></td>
+                                <td class="py-3 px-4">6/10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-neonGreenDim border border-neonGreen/20 rounded-xl p-5 my-6">
+                    <div class="flex items-start gap-3">
+                        <iconify-icon icon="mdi:lightbulb-on-outline" class="text-neonGreen text-xl mt-0.5 flex-shrink-0"></iconify-icon>
+                        <p class="text-sm text-textPrimary/90"><strong class="text-neonGreen">Key Insight:</strong> For most teams starting out, Chroma is perfectly fine. But if you need metadata filtering at scale (which you will), invest time in Qdrant early. The migration cost only increases.</p>
+                    </div>
+                </div>
+
+                <h2 class="text-xl font-semibold !mt-10 !mb-4 flex items-center gap-2">
+                    <span class="text-neonGreen font-mono text-base">03.</span>
+                    Chunking Strategies
+                </h2>
+                <p>The biggest impact on retrieval quality isn't the embedding model — it's how you chunk your documents. After months of experimentation, here's what actually works:</p>
+
+                <div class="bg-surface border border-border rounded-xl overflow-hidden code-window relative my-6">
+                    <div class="flex items-center justify-between px-4 py-3 border-b border-border">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-[#ff5f57]"></span>
+                            <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+                            <span class="w-3 h-3 rounded-full bg-[#28c840]"></span>
+                        </div>
+                        <span class="font-mono text-[11px] text-textSecondary">chunking.py</span>
+                    </div>
+                    <div class="p-5 font-mono text-[13px] leading-7 relative z-10 overflow-x-auto">
+<pre class="!bg-transparent !p-0 !m-0 !border-none"><span class="text-[#c678dd]">def</span> <span class="text-[#61afef]">semantic_chunk</span><span class="text-textPrimary">(text: str, threshold=</span><span class="text-[#d19a66]">0.65</span><span class="text-textPrimary">):</span>
+<span class="text-textPrimary">    sentences = sent_tokenize(text)</span>
+<span class="text-textPrimary">    embeddings = model.encode(sentences)</span>
+<span class="text-textPrimary">    chunks, current = [], [sentences[0]]</span>
+
+<span class="text-textPrimary">    </span><span class="text-[#c678dd]">for</span> <span class="text-textPrimary">i </span><span class="text-[#c678dd]">in</span> <span class="text-textPrimary">range(</span><span class="text-[#d19a66]">1</span><span class="text-textPrimary">, len(sentences)):</span>
+<span class="text-textPrimary">        sim = cosine_similarity(</span>
+<span class="text-textPrimary">            embeddings[i-1], embeddings[i]</span>
+<span class="text-textPrimary">        )</span>
+<span class="text-textPrimary">        </span><span class="text-[#c678dd]">if</span> <span class="text-textPrimary">sim < threshold:</span>
+<span class="text-textPrimary">            chunks.append(</span><span class="text-[#98c379]">" "</span><span class="text-textPrimary">.join(current))</span>
+<span class="text-textPrimary">            current = [sentences[i]]</span>
+<span class="text-textPrimary">        </span><span class="text-[#c678dd]">else</span><span class="text-textPrimary">:</span>
+<span class="text-textPrimary">            current.append(sentences[i])</span>
+
+<span class="text-textPrimary">    chunks.append(</span><span class="text-[#98c379]">" "</span><span class="text-textPrimary">.join(current))</span>
+<span class="text-textPrimary">    </span><span class="text-[#c678dd]">return</span> <span class="text-textPrimary">chunks  <span class="text-[#5c6370]"># ~35% better retrieval</span></span></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-neonGreen/[0.01] to-transparent pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="font-mono text-neonBlue text-sm">#</span>
+                <span class="font-mono text-[11px] text-textSecondary tracking-widest uppercase">Open Source</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight mb-12">Featured Projects</h2>
+
+            <div class="grid md:grid-cols-2 gap-5">
+                <!-- Project 1 -->
+                <div class="github-card bg-surface border border-border rounded-xl p-6 hover:border-neonGreen/30 transition-all group cursor-pointer" onclick="showToast('Opening repository...')">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-neonGreenDim border border-neonGreen/20 flex items-center justify-center github-card-icon transition-all">
+                                <iconify-icon icon="mdi:brain" class="text-neonGreen text-xl"></iconify-icon>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-sm group-hover:text-neonGreen transition-colors">neural-forge</h3>
+                                <span class="font-mono text-[10px] text-textSecondary">Python · PyTorch</span>
+                            </div>
+                        </div>
+                        <iconify-icon icon="mdi:open-in-new" class="text-textSecondary group-hover:text-neonGreen text-lg transition-colors"></iconify-icon>
+                    </div>
+                    <p class="text-textSecondary text-sm font-light leading-relaxed mb-5">A lightweight deep learning framework with automatic mixed precision, gradient checkpointing, and distributed training out of the box.</p>
+                    <div class="flex items-center gap-5 font-mono text-[11px] text-textSecondary">
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-neonGreen/30"></span>2.4k stars</span>
+                        <span class="flex items-center gap-1.5"><iconify-icon icon="mdi:source-fork" class="text-sm"></iconify-icon>312 forks</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-neonBlue"></span>Python</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="github-card bg-surface border border-border rounded-xl p-6 hover:border-neonBlue/30 transition-all group cursor-pointer" onclick="showToast('Opening repository...')">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-neonBlueDim border border-neonBlue/20 flex items-center justify-center github-card-icon transition-all">
+                                <iconify-icon icon="mdi:database-search" class="text-neonBlue text-xl"></iconify-icon>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-sm group-hover:text-neonBlue transition-colors">data-scanner</h3>
+                                <span class="font-mono text-[10px] text-textSecondary">Python · Rust Extension</span>
+                            </div>
+                        </div>
+                        <iconify-icon icon="mdi:open-in-new" class="text-textSecondary group-hover:text-neonBlue text-lg transition-colors"></iconify-icon>
+                    </div>
+                    <p class="text-textSecondary text-sm font-light leading-relaxed mb-5">Blazing-fast data profiling library. Scan millions of rows in seconds to detect schema drift, anomalies, and data quality issues.</p>
+                    <div class="flex items-center gap-5 font-mono text-[11px] text-textSecondary">
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-neonBlue/30"></span>1.8k stars</span>
+                        <span class="flex items-center gap-1.5"><iconify-icon icon="mdi:source-fork" class="text-sm"></iconify-icon>198 forks</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-neonGreen"></span>Rust</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="github-card bg-surface border border-border rounded-xl p-6 hover:border-[#ffbd2e]/30 transition-all group cursor-pointer" onclick="showToast('Opening repository...')">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-[#ffbd2e]/10 border border-[#ffbd2e]/20 flex items-center justify-center github-card-icon transition-all">
+                                <iconify-icon icon="mdi:chart-timeline-variant-shimmer" class="text-[#ffbd2e] text-xl"></iconify-icon>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-sm group-hover:text-[#ffbd2e] transition-colors">ml-explain-dashboard</h3>
+                                <span class="font-mono text-[10px] text-textSecondary">Python · Streamlit · SHAP</span>
+                            </div>
+                        </div>
+                        <iconify-icon icon="mdi:open-in-new" class="text-textSecondary group-hover:text-[#ffbd2e] text-lg transition-colors"></iconify-icon>
+                    </div>
+                    <p class="text-textSecondary text-sm font-light leading-relaxed mb-5">One-command ML model explainability dashboard. SHAP values, feature importance, partial dependence plots — zero configuration needed.</p>
+                    <div class="flex items-center gap-5 font-mono text-[11px] text-textSecondary">
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]/30"></span>956 stars</span>
+                        <span class="flex items-center gap-1.5"><iconify-icon icon="mdi:source-fork" class="text-sm"></iconify-icon>127 forks</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-neonGreen"></span>Python</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="github-card bg-surface border border-border rounded-xl p-6 hover:border-[#c678dd]/30 transition-all group cursor-pointer" onclick="showToast('Opening repository...')">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-[#c678dd]/10 border border-[#c678dd]/20 flex items-center justify-center github-card-icon transition-all">
+                                <iconify-icon icon="mdi:text-box-search-outline" class="text-[#c678dd] text-xl"></iconify-icon>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-sm group-hover:text-[#c678dd] transition-colors">token-flow</h3>
+                                <span class="font-mono text-[10px] text-textSecondary">Python · FastAPI · Transformers</span>
+                            </div>
+                        </div>
+                        <iconify-icon icon="mdi:open-in-new" class="text-textSecondary group-hover:text-[#c678dd] text-lg transition-colors"></iconify-icon>
+                    </div>
+                    <p class="text-textSecondary text-sm font-light leading-relaxed mb-5">Production-ready text classification API with automatic labeling, active learning loop, and model versioning built in.</p>
+                    <div class="flex items-center gap-5 font-mono text-[11px] text-textSecondary">
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#c678dd]/30"></span>743 stars</span>
+                        <span class="flex items-center gap-1.5"><iconify-icon icon="mdi:source-fork" class="text-sm"></iconify-icon>89 forks</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-neonBlue"></span>Python</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Contribution Graph -->
+            <div class="mt-12 bg-surface border border-border rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs text-textSecondary">Contribution Activity</span>
+                    <span class="font-mono text-[10px] text-neonGreen">1,247 contributions in 2025</span>
+                </div>
+                <div class="flex gap-[3px] overflow-x-auto pb-2" id="contributionGraph"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="font-mono text-neonGreen text-sm">#</span>
+                <span class="font-mono text-[11px] text-textSecondary tracking-widest uppercase">About</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight mb-12">About Me</h2>
+
+            <div class="grid lg:grid-cols-5 gap-10">
+                <!-- Left Column -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Avatar + Info -->
+                    <div class="bg-surface border border-border rounded-xl p-6 text-center">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-2xl p-[2px] avatar-ring">
+                            <img src="https://z-cdn-media.chatglm.cn/files/0024db59-6cb4-4a01-b8b6-7b8ef7f7b1f9.jpg?auth_key=1877919405-2b42dba1269f4e2aae017c2e7c907fbe-0-7f8b867b93109ec76837e06e2e4177ac" class="w-full h-full object-cover rounded-2xl" alt="Mahesh Vardhan Madduri">
+                        </div>
+                        <h3 class="font-semibold text-lg">Mahesh Vardhan Madduri</h3>
+                        <p class="font-mono text-xs text-neonGreen mt-1">Senior Data Scientist</p>
+                        <p class="text-textSecondary text-sm font-light mt-3 leading-relaxed">Designing and deploying ML systems that deliver measurable business impact at scale.</p>
+                        <div class="flex justify-center gap-3 mt-5">
+                            <a href="https://linkedin.com/in/mmvcodes" target="_blank" class="w-8 h-8 rounded-lg bg-bg border border-border flex items-center justify-center hover:border-neonBlue/40 transition-all">
+                                <iconify-icon icon="mdi:linkedin" class="text-textSecondary hover:text-neonBlue text-sm"></iconify-icon>
+                            </a>
+                            <a href="#" class="w-8 h-8 rounded-lg bg-bg border border-border flex items-center justify-center hover:border-neonGreen/40 transition-all">
+                                <iconify-icon icon="mdi:github" class="text-textSecondary hover:text-neonGreen text-sm"></iconify-icon>
+                            </a>
+                            <a href="mailto:mmvcodes@gmail.com" class="w-8 h-8 rounded-lg bg-bg border border-border flex items-center justify-center hover:border-neonGreen/40 transition-all">
+                                <iconify-icon icon="mdi:email-outline" class="text-textSecondary hover:text-neonGreen text-sm"></iconify-icon>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Card -->
+                    <div class="bg-surface border border-border rounded-xl p-6 space-y-4">
+                        <h4 class="font-mono text-[11px] text-textSecondary tracking-widest uppercase mb-3">Contact</h4>
+                        <a href="mailto:mmvcodes@gmail.com" class="flex items-center gap-3 text-sm text-textSecondary hover:text-neonGreen transition-colors group">
+                            <iconify-icon icon="mdi:email-outline" class="text-lg group-hover:scale-110 transition-transform"></iconify-icon>
+                            <span class="font-mono text-xs">mmvcodes@gmail.com</span>
+                        </a>
+                        <a href="https://linkedin.com/in/mmvcodes" target="_blank" class="flex items-center gap-3 text-sm text-textSecondary hover:text-neonBlue transition-colors group">
+                            <iconify-icon icon="mdi:linkedin" class="text-lg group-hover:scale-110 transition-transform"></iconify-icon>
+                            <span class="font-mono text-xs">linkedin.com/in/mmvcodes</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 text-sm text-textSecondary hover:text-neonGreen transition-colors group">
+                            <iconify-icon icon="mdi:map-marker-outline" class="text-lg group-hover:scale-110 transition-transform"></iconify-icon>
+                            <span class="font-mono text-xs">Rajahmundry, India</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 text-sm text-textSecondary hover:text-neonGreen transition-colors group">
+                            <iconify-icon icon="mdi:calendar-outline" class="text-lg group-hover:scale-110 transition-transform"></iconify-icon>
+                            <span class="font-mono text-xs">Open to opportunities</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="lg:col-span-3 space-y-8">
+                    <!-- Experience Timeline -->
+                    <div class="bg-surface border border-border rounded-xl p-6">
+                        <h4 class="font-mono text-[11px] text-textSecondary tracking-widest uppercase mb-6">Experience</h4>
+                        <div class="space-y-6 relative">
+                            <div class="absolute left-[7px] top-2 bottom-2 w-px bg-border"></div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-[15px] h-[15px] rounded-full bg-neonGreen border-[3px] border-surface flex-shrink-0 mt-1 relative z-10 animate-glow"></div>
+                                <div>
+                                    <div class="flex items-center justify-between flex-wrap gap-2">
+                                        <h5 class="font-semibold text-sm">Senior Data Scientist</h5>
+                                        <span class="font-mono text-[10px] text-neonGreen bg-neonGreenDim px-2 py-0.5 rounded">Current</span>
+                                    </div>
+                                    <p class="font-mono text-xs text-neonBlue mt-0.5">TechCorp AI · 2024 – Present</p>
+                                    <p class="text-textSecondary text-sm font-light mt-2 leading-relaxed">Leading a team of 4 data scientists. Architected RAG systems processing 2M+ documents. Reduced model inference costs by 60% through optimization.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-[15px] h-[15px] rounded-full bg-neonBlue border-[3px] border-surface flex-shrink-0 mt-1 relative z-10"></div>
+                                <div>
+                                    <h5 class="font-semibold text-sm">Data Scientist</h5>
+                                    <p class="font-mono text-xs text-neonBlue mt-0.5">DataFlow Inc · 2022 – 2024</p>
+                                    <p class="text-textSecondary text-sm font-light mt-2 leading-relaxed">Built end-to-end ML pipelines for fraud detection and recommendation systems. Deployed 15+ models to production serving 10M+ users.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-[15px] h-[15px] rounded-full bg-[#ffbd2e] border-[3px] border-surface flex-shrink-0 mt-1 relative z-10"></div>
+                                <div>
+                                    <h5 class="font-semibold text-sm">Junior Data Scientist</h5>
+                                    <p class="font-mono text-xs text-neonBlue mt-0.5">AnalyticsHub · 2021 – 2022</p>
+                                    <p class="text-textSecondary text-sm font-light mt-2 leading-relaxed">Started with exploratory analysis and statistical modeling. Built first production model — a customer churn predictor with 89% accuracy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Stack -->
+                    <div class="bg-surface border border-border rounded-xl p-6">
+                        <h4 class="font-mono text-[11px] text-textSecondary tracking-widest uppercase mb-6">Tech Stack</h4>
+                        <div class="space-y-4" id="skillBars">
+                            <div class="skill-item">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="font-mono text-xs text-textPrimary flex items-center gap-2">
+                                        <iconify-icon icon="mdi:language-python" class="text-neonGreen"></iconify-icon>
+                                        Python / PyTorch / TensorFlow
+                                    </span>
+                                    <span class="font-mono text-[10px] text-neonGreen">97%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-bg rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="97%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="font-mono text-xs text-textPrimary flex items-center gap-2">
+                                        <iconify-icon icon="mdi:database" class="text-neonBlue"></iconify-icon>
+                                        SQL / Spark / BigQuery
+                                    </span>
+                                    <span class="font-mono text-[10px] text-neonBlue">92%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-bg rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="92%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="font-mono text-xs text-textPrimary flex items-center gap-2">
+                                        <iconify-icon icon="mdi:robot-outline" class="text-[#ffbd2e]"></iconify-icon>
+                                        NLP / LLMs / RAG
+                                    </span>
+                                    <span class="font-mono text-[10px] text-[#ffbd2e]">95%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-bg rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="font-mono text-xs text-textPrimary flex items-center gap-2">
+                                        <iconify-icon icon="mdi:docker" class="text-[#c678dd]"></iconify-icon>
+                                        Docker / K8s / MLOps
+                                    </span>
+                                    <span class="font-mono text-[10px] text-[#c678dd]">85%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-bg rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="font-mono text-xs text-textPrimary flex items-center gap-2">
+                                        <iconify-icon icon="mdi:chart-box-outline" class="text-neonGreen"></iconify-icon>
+                                        Pandas / NumPy / Scikit-learn
+                                    </span>
+                                    <span class="font-mono text-[10px] text-neonGreen">96%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-bg rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="96%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="font-mono text-xs text-textPrimary flex items-center gap-2">
+                                        <iconify-icon icon="mdi:api" class="text-neonBlue"></iconify-icon>
+                                        FastAPI / Airflow / dbt
+                                    </span>
+                                    <span class="font-mono text-[10px] text-neonBlue">88%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-bg rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full rounded-full" style="width: 0%" data-width="88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool Tags -->
+                    <div class="bg-surface border border-border rounded-xl p-6">
+                        <h4 class="font-mono text-[11px] text-textSecondary tracking-widest uppercase mb-4">Tools & Platforms</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonGreen/30 hover:text-neonGreen transition-all cursor-default">AWS</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonBlue/30 hover:text-neonBlue transition-all cursor-default">GCP</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonGreen/30 hover:text-neonGreen transition-all cursor-default">Docker</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonBlue/30 hover:text-neonBlue transition-all cursor-default">Kubernetes</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonGreen/30 hover:text-neonGreen transition-all cursor-default">MLflow</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonBlue/30 hover:text-neonBlue transition-all cursor-default">Weights & Biases</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonGreen/30 hover:text-neonGreen transition-all cursor-default">DVC</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonBlue/30 hover:text-neonBlue transition-all cursor-default">Airflow</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonGreen/30 hover:text-neonGreen transition-all cursor-default">dbt</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonBlue/30 hover:text-neonBlue transition-all cursor-default">Ray</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonGreen/30 hover:text-neonGreen transition-all cursor-default">Jupyter</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonBlue/30 hover:text-neonBlue transition-all cursor-default">Streamlit</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonGreen/30 hover:text-neonGreen transition-all cursor-default">Grafana</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonBlue/30 hover:text-neonBlue transition-all cursor-default">PostgreSQL</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonGreen/30 hover:text-neonGreen transition-all cursor-default">Redis</span>
+                            <span class="font-mono text-[11px] px-3 py-1.5 rounded-lg bg-bg border border-border text-textSecondary hover:border-neonBlue/30 hover:text-neonBlue transition-all cursor-default">Kafka</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-border py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-7 h-7 rounded-lg bg-neonGreenDim border border-neonGreen/30 flex items-center justify-center">
+                        <span class="font-mono text-neonGreen text-[10px] font-bold">MV</span>
+                    </div>
+                    <span class="font-mono text-xs text-textSecondary">
+                        © 2026 Mahesh Vardhan Madduri. All rights reserved.
+                    </span>
+                </div>
+                <div class="flex items-center gap-1 font-mono text-[11px] text-textSecondary">
+                    <span class="w-1.5 h-1.5 rounded-full bg-neonGreen animate-pulse"></span>
+                    <span>Rajahmundry, India</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== Tag Filtering ====================
+        function filterArticles(tag) {
+            document.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('tag-active'));
+            document.querySelector(`[data-tag="${tag}"]`).classList.add('tag-active');
+
+            document.querySelectorAll('.article-card').forEach(card => {
+                const cardTags = card.dataset.tags;
+                if (tag === 'all' || cardTags.includes(tag)) {
+                    card.style.display = '';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    requestAnimationFrame(() => {
+                        card.style.transition = 'all 0.4s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    });
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // ==================== Article Detail ====================
+        function openArticle(el) {
+            document.getElementById('articles').classList.add('hidden');
+            document.getElementById('articleDetail').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeArticle() {
+            document.getElementById('articleDetail').classList.add('hidden');
+            document.getElementById('articles').classList.remove('hidden');
+        }
+
+        // ==================== Copy Code ====================
+        function copyCode(btn) {
+            const codeBlock = btn.closest('.bg-surface').querySelector('pre');
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                const original = btn.innerHTML;
+                btn.innerHTML = '<iconify-icon icon="mdi:check" class="text-sm"></iconify-icon> Copied!';
+                btn.classList.add('text-neonGreen');
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.classList.remove('text-neonGreen');
+                }, 2000);
+            });
+        }
+
+        // ==================== Toast ====================
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast flex items-center gap-2 bg-surface border border-neonGreen/20 rounded-lg px-4 py-3 shadow-lg';
+            toast.innerHTML = `
+                <iconify-icon icon="mdi:check-circle" class="text-neonGreen"></iconify-icon>
+                <span class="font-mono text-xs text-textPrimary">${message}</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.transition = 'all 0.3s ease';
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(20px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // ==================== Contribution Graph ====================
+        function generateContributionGraph() {
+            const container = document.getElementById('contributionGraph');
+            const levels = ['bg-bg', 'bg-neonGreen/10', 'bg-neonGreen/25', 'bg-neonGreen/45', 'bg-neonGreen/70'];
+            const weeks = 52;
+            const days = 7;
+
+            for (let w = 0; w < weeks; w++) {
+                const col = document.createElement('div');
+                col.className = 'flex flex-col gap-[3px]';
+                for (let d = 0; d < days; d++) {
+                    const cell = document.createElement('div');
+                    const rand = Math.random();
+                    let level;
+                    if (rand < 0.3) level = 0;
+                    else if (rand < 0.55) level = 1;
+                    else if (rand < 0.75) level = 2;
+                    else if (rand < 0.9) level = 3;
+                    else level = 4;
+                    cell.className = `w-[11px] h-[11px] rounded-sm ${levels[level]} hover:ring-1 hover:ring-neonGreen/50 transition-all cursor-pointer`;
+                    col.appendChild(cell);
+                }
+                container.appendChild(col);
+            }
+        }
+        generateContributionGraph();
+
+        // ==================== Skill Bars Animation ====================
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.skill-bar').forEach(bar => {
+                        setTimeout(() => {
+                            bar.style.width = bar.dataset.width;
+                        }, 200);
+                    });
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const skillSection = document.getElementById('skillBars');
+        if (skillSection) skillObserver.observe(skillSection);
+
+        // ==================== Matrix Rain Background ====================
+        function initMatrix() {
+            const container = document.getElementById('matrixBg');
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            for (let i = 0; i < 15; i++) {
+                const col = document.createElement('div');
+                col.className = 'absolute top-0 font-mono text-neonGreen text-sm';
+                col.style.left = Math.random() * 100 + '%';
+                col.style.animationDuration = (8 + Math.random() * 12) + 's';
+                col.style.animationDelay = Math.random() * 10 + 's';
+                col.style.animation = `matrixRain ${8 + Math.random() * 12}s linear ${Math.random() * 10}s infinite`;
+                col.style.opacity = 0.4 + Math.random() * 0.6;
+                let text = '';
+                for (let j = 0; j < 20; j++) {
+                    text += chars[Math.floor(Math.random() * chars.length)] + '\n';
+                }
+                col.textContent = text;
+                container.appendChild(col);
+            }
+        }
+        initMatrix();
+
+        // ==================== Nav Active State ====================
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ==================== Scroll Reveal ====================
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            revealObserver.observe(section);
+        });
+    </script>
+</body>
+</html>
