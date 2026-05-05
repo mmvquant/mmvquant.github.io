@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahesh Vardhan Madduri — Data Scientist</title>
+    <title>Mahesh Vardhan Madduri — Building Intelligent Systems</title>
+
+    <!-- Favicon: Elephant image -->
+    <link rel="icon" type="image/png" href="https://z-cdn-media.chatglm.cn/files/148aa9ba-f57a-4e13-86ec-a8133a57b9f5.png?auth_key=1877973608-76c7587b03504099aed931f1fef984c0-0-2586573784906ab85639c0f4cab815f5">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -222,7 +226,7 @@
                         <div><span class="text-neonGreen">$</span> <span class="text-textSecondary">models_deployed</span> <span class="text-neonBlue">--count</span> <span class="text-neonGreen">47+</span></div>
                         <div><span class="text-neonGreen">$</span> <span class="text-textSecondary">datasets_processed</span> <span class="text-neonBlue">--size</span> <span class="text-neonGreen">50TB+</span></div>
                         <div><span class="text-neonGreen">$</span> <span class="text-textSecondary">papers_published</span> <span class="text-neonBlue">--count</span> <span class="text-neonGreen">8</span></div>
-                        <div class="flex items-center"><span class="text-neonGreen">$</span> <span class="text-textSecondary mr-2">echo</span> <span class="text-textPrimary">"Let's connect and build"</span><span class="cursor-blink text-neonGreen ml-0.5">▊</span></div>
+                        <div class="flex items-center"><span class="text-neonGreen">$</span> <span class="text-textSecondary mr-2">echo</span> <span class="text-textPrimary" id="echoText" style="transition: opacity 0.3s ease, transform 0.3s ease;">"Let's connect and build"</span><span class="cursor-blink text-neonGreen ml-0.5">▊</span></div>
                     </div>
                 </div>
 
@@ -727,7 +731,7 @@
                     <!-- Avatar + Info -->
                     <div class="bg-surface border border-border rounded-xl p-6 text-center">
                         <div class="w-32 h-32 mx-auto mb-4 rounded-2xl p-[2px] avatar-ring">
-                            <img src="https://drive.google.com/file/d/136XFZtXxUqdgNspM8DQv6b1wuDOhBrGy/view?usp=sharing" class="w-full h-full object-cover rounded-2xl" alt="Mahesh Vardhan Madduri">
+                            <img src="https://z-cdn-media.chatglm.cn/files/e93cc7bc-1b3d-4803-9556-269879f10740.jpg?auth_key=1877973608-dc3c444426564a619ea01214169d2a81-0-8cfe9828bc758fef7e36a91f2362e394" class="w-full h-full object-cover rounded-2xl" alt="Mahesh Vardhan Madduri">
                         </div>
                         <h3 class="font-semibold text-lg">Mahesh Vardhan Madduri</h3>
                         <p class="font-mono text-xs text-neonGreen mt-1">Senior Data Scientist</p>
@@ -934,6 +938,33 @@
     </footer>
 
     <script>
+        // ==================== Echo Text Rotation ====================
+        const echoTexts = [
+            '"Let\'s connect and build"',
+            '"5 years of shipping ML to production"',
+            '"From notebooks to scalable microservices"',
+            '"Turning messy data into business value"',
+            '"Open source contributor & lifelong learner"',
+            '"Currently exploring agentic AI systems"'
+        ];
+        let echoIndex = 0;
+        const echoEl = document.getElementById('echoText');
+        if (echoEl) {
+            setInterval(() => {
+                echoEl.style.opacity = '0';
+                echoEl.style.transform = 'translateY(4px)';
+                setTimeout(() => {
+                    echoIndex = (echoIndex + 1) % echoTexts.length;
+                    echoEl.textContent = echoTexts[echoIndex];
+                    echoEl.style.transform = 'translateY(-4px)';
+                    requestAnimationFrame(() => {
+                        echoEl.style.opacity = '1';
+                        echoEl.style.transform = 'translateY(0)';
+                    });
+                }, 300);
+            }, 2000);
+        }
+
         // ==================== Tag Filtering ====================
         function filterArticles(tag) {
             document.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('tag-active'));
